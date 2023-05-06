@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="warn" packages="org.apache.logging.log4j.core,io.sentry.log4j2">
+    <Properties>
+        <property name="BASE_LOG_DIR">${env:LOG_DIR:-./logs}</property>
+        <Property name="LOG_PATTERN">
+            %d{yyyy-MM-dd HH:mm:ss,SSS} [%-5level] [%thread] %C#%M(%L): %msg%n
+        </Property>
+    </Properties>
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <RollingFile name="BUSINESS" fileName="${BASE_LOG_DIR}/business.log"
+                     filePattern="${BASE_LOG_DIR}/history/business.log-%d{yyyy-MM-dd}.%i">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="1GB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="org.apache.zookeeper" level="WARN"/>
+        <Logger name="org.apache.curator" level="WARN"/>
+        <Logger name="com.alibaba.dubbo" level="WARN"/>
+
+        <Root level="INFO">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="BUSINESS"/>
+        </Root>
+    </Loggers>
+</configuration>

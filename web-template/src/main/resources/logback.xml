@@ -1,0 +1,15 @@
+<configuration>
+
+    <property scope="context" name="PATTERN" value="%date %level [%thread]: %msg%n"/>
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="Console"/>
+    </root>
+
+</configuration>

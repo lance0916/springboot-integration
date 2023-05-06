@@ -1,0 +1,82 @@
+server:
+  port: 8085
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: web01
+          uri: http://127.0.0.1:9090
+          predicates:
+            - Header=to, web01
+        - id: web02
+          uri: http://127.0.0.1:9091
+          predicates:
+            - Header=to, web02
+#      globalcors: # 跨域配置
+#        cors-configurations:
+#          '[/**]':
+#            allowed-methods:
+#              - GET
+#      httpclient: # 自定义超时
+#        connect-timeout: 3000
+#        response-timeout: 5000
+#      routes:
+#        - id: web01
+#          uri: http://127.0.0.1:9090
+#          metadata:
+#            response-timeout: 200
+#            connect-timeout: 200
+#          predicates: # 符合下面条件的转发到该 uri
+#            - After=2017-01-20T17:42:47.789-07:00[America/Denver] # 在某个时间之后
+#            - Before=2017-01-20T17:42:47.789-07:00[America/Denver] # 时间之前
+#            - Between=2017-01-20T17:42:47.789-07:00[America/Denver], 2017-01-21T17:42:47.789-07:00[America/Denver] # 在时间段之间
+#            - Cookie=chocolate, ch.p # Cookie中包含 name=chocolate，value的值符合正则表达式 ch.p
+#            - Method=GET,POST # 请求方法是 GET 或 POST 时
+#            - Header=name, Mike # Header中包含 name=name，value的值符合正则表达式 Mike 时
+#            - Host=**.somehost.org,**.anotherhost.org # 正则匹配请求头中的 Host
+#            - Path=/red/{segment},/blue/{segment} # restful 的形式进行匹配 {segment} 相当于占位符
+#            - Query=baz # uri 参数中包含 baz 参数名
+#            - Query=baz, val # uri 参数中包含 baz 参数名，并且其 value 值符合正则 val
+#            - Weight=group1, 8 # 分组1中权重是 80%
+#          filters:
+#            - AddRequestHeader=from, gateway # 在Header中添加一个键值对 from=gateway
+#            - SetRequestHeader=X-Request-Red, Blue
+#            - AddRequestHeader=X-Request-Red, Blue-{segment} # 可以引用 restful uri 中的值
+#            - SetRequestHeader=foo, bar-{segment}
+#            - AddRequestParameter=red, blue # 添加 uri 参数 red=blue
+#            - AddRequestParameter=foo, bar-{segment} # 可以引用 restful uri 中的值
+#            - AddResponseHeader=X-Response-Red, Blue # 添加相应 Header
+#            - SetResponseHeader=X-Response-Red, Blue
+#            - AddResponseHeader=foo, bar-{segment} # 可以引用 restful uri 中的值
+#            - SetResponseHeader=foo, bar-{segment}
+#            - name: RequestRateLimiter # Redis限流
+#              args:
+#                replenishRate: 1 # 每秒填充几个令牌到桶中
+#                burstCapacity: 20 # 桶的容量
+#                requestedTokens: 1 # 每次从桶中拿几个令牌
+#            - RemoveRequestHeader=X-Request-Foo # 从请求中移除 name 为 X-Request-Foo 的 header 键值对
+#            - RemoveResponseHeader=X-Response-Foo
+#            - RemoveRequestParameter=red
+#            - RequestHeaderSize=1000B # 限制请求头的大小超过 1000B，否则会返回 httpStatusCode=431
+#            - StripPrefix=1 # 用户请求路径是/api/brand,而真实路径是/brand，这时候我们需要去掉/api才是真实路径
+#            - name: Retry # 配置重试
+#              args:
+#                retries: 3
+#                statuses: BAD_GATEWAY # org.springframework.http.HttpStatus
+#                methods: GET,POST
+##                exceptions: TimeoutException # 发生这些异常时进行重试
+#                backoff:
+#                  firstBackoff: 10ms
+#                  maxBackoff: 50ms
+#                  factor: 2
+#                  basedOnPreviousValue: false
+#            - name: RequestSize #
+#              args:
+#                maxSize: 1KB # 默认单位是 B
+#        - id: web02
+#          uri: http://127.0.0.1:9091
+#          predicates:
+##            - Method=POST
+##            - Header=name, Tom
+#            - Weight=group1, 2 # 分组1中权重是 20%

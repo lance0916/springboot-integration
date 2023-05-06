@@ -1,0 +1,24 @@
+<configuration>
+
+    <property scope="context" name="LOG_BASE_DIR" value="${env:LOG_DIR:-./logs}"/>
+    <property scope="context" name="PATTERN" value="%date %level [%thread] %logger{10} [%file : %line] %msg%n"/>
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="Business" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_BASE_DIR}/business.log</file>
+        <encoder>
+            <pattern>${PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="Console"/>
+        <appender-ref ref="Business"/>
+    </root>
+
+</configuration>
