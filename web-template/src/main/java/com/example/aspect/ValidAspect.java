@@ -1,15 +1,13 @@
 package com.example.aspect;
 
-import com.example.annotation.NoValid;
-import com.example.annotation.ValidLogin;
-import com.example.annotation.ValidOpenApi;
+import com.example.aspect.annotation.NoValid;
+import com.example.aspect.annotation.ValidLogin;
+import com.example.aspect.annotation.ValidOpenApi;
 import com.example.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 

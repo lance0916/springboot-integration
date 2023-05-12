@@ -1,6 +1,9 @@
 package com.example;
 
-import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
+import com.example.entity.UserInfo;
+import com.example.entity.UserInfo.Column;
+import com.example.entity.UserInfoExample;
+import com.example.entity.UserInfoExample.IExampleWhen;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -13,11 +16,7 @@ import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Slf4j
-@SpringBootApplication(
-        exclude = {
-                MybatisPlusAutoConfiguration.class
-        }
-)
+@SpringBootApplication
 @EnableScheduling
 @EnableRetry(proxyTargetClass = true)
 public class WebTemplateApplication implements ApplicationRunner, BeanPostProcessor {
@@ -28,6 +27,8 @@ public class WebTemplateApplication implements ApplicationRunner, BeanPostProces
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        log.info("Hello Web");
+
     }
 
     @Override

@@ -1,0 +1,27 @@
+server:
+  port: 8080
+  shutdown: graceful
+  ssl:
+    enabled: false
+
+# Spring 配置
+spring:
+  profiles:
+    active: dev
+  config:
+    import:
+      - application-${spring.profiles.active}/application-datasource.yml
+      - application-${spring.profiles.active}/application-tomcat.yml
+  jackson:
+    date-format: 'yyyy-MM-dd HH:mm:ss'
+    default-property-inclusion: non_null
+    deserialization:
+      fail-on-unknown-properties: true
+
+# 日志配置
+logging:
+  config: classpath:application-${spring.profiles.active}/logback.xml
+
+# Knife4j
+knife4j:
+  enable: true

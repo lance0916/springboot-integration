@@ -1,4 +1,4 @@
-package com.example.annotation;
+package com.example.aspect.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

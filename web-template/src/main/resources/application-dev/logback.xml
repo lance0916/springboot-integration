@@ -1,6 +1,8 @@
 <configuration>
 
-    <property scope="context" name="PATTERN" value="%date %level [%thread]: %msg%n"/>
+<!--    <property scope="context" name="PATTERN" value="%date %level [%thread]: %msg%n"/>-->
+    <property scope="context" name="PATTERN"
+        value="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] [%logger#%method:%line] %m%n"/>
 
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>

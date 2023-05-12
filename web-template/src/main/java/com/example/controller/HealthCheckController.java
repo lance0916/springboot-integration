@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.annotation.NoValid;
+import com.example.aspect.annotation.NoValid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

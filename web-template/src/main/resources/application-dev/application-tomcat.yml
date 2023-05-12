@@ -1,0 +1,11 @@
+server:
+  tomcat:
+    accept-count: 100
+    max-connections: 8192
+    max-keep-alive-requests: 100
+    threads:
+      max: 200
+      min-spare: 10
+    uri-encoding: UTF-8
+    mbeanregistry:
+      enabled: true

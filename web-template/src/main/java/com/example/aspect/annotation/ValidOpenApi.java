@@ -1,4 +1,4 @@
-package com.example.annotation;
+package com.example.aspect.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -8,10 +8,10 @@ import java.lang.annotation.Target;
 
 /**
  * @author WuQinglong
- * @since 2022/11/24 18:38
+ * @since 2022/11/28 09:08
  */
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface ValidLogin {
+public @interface ValidOpenApi {
 }
