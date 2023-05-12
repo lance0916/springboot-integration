@@ -11,15 +11,20 @@
         <property name="javaFileEncoding" value="UTF-8"/>
 
         <!-- 插件 -->
-        <!--覆盖生成XML文件-->
+        <!-- 覆盖生成XML文件 -->
         <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
-        <plugin type="com.itfsw.mybatis.generator.plugins.BatchInsertPlugin"/>
+        <!-- 生成 withXXX 的 Fluent 方法 -->
+        <plugin type="org.mybatis.generator.plugins.FluentBuilderMethodsPlugin"/>
+        <!-- 生成的 Mapper 自带 @Mapper 注解 -->
+        <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>
         <plugin type="com.itfsw.mybatis.generator.plugins.ModelColumnPlugin"/>
+        <!-- 支持 批量插入 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.BatchInsertPlugin"/>
+        <!-- 增加 SelectOneByExample 方法 -->
         <plugin type="com.itfsw.mybatis.generator.plugins.SelectOneByExamplePlugin"/>
-        <plugin type="com.itfsw.mybatis.generator.plugins.LimitPlugin"/>
-        <plugin type="com.itfsw.mybatis.generator.plugins.MapperAnnotationPlugin"/>
-        <plugin type="com.itfsw.mybatis.generator.plugins.ModelBuilderPlugin"/>
+        <!-- Select 方法支持查询指定列 -->
         <plugin type="com.itfsw.mybatis.generator.plugins.SelectSelectivePlugin"/>
+        <!-- 增加 XXXExample 类 -->
         <plugin type="com.itfsw.mybatis.generator.plugins.ExampleEnhancedPlugin">
             <property name="enableAndIf" value="false"/>
         </plugin>

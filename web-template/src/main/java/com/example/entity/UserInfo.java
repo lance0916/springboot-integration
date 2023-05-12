@@ -15,12 +15,22 @@ public class UserInfo {
         return id;
     }
 
+    public UserInfo withId(Integer id) {
+        this.setId(id);
+        return this;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public UserInfo withName(String name) {
+        this.setName(name);
+        return this;
     }
 
     public void setName(String name) {
@@ -31,39 +41,13 @@ public class UserInfo {
         return money;
     }
 
+    public UserInfo withMoney(BigDecimal money) {
+        this.setMoney(money);
+        return this;
+    }
+
     public void setMoney(BigDecimal money) {
         this.money = money;
-    }
-
-    public static UserInfo.Builder builder() {
-        return new UserInfo.Builder();
-    }
-
-    public static class Builder {
-        private UserInfo obj;
-
-        public Builder() {
-            this.obj = new UserInfo();
-        }
-
-        public Builder id(Integer id) {
-            obj.setId(id);
-            return this;
-        }
-
-        public Builder name(String name) {
-            obj.setName(name);
-            return this;
-        }
-
-        public Builder money(BigDecimal money) {
-            obj.setMoney(money);
-            return this;
-        }
-
-        public UserInfo build() {
-            return this.obj;
-        }
     }
 
     public enum Column {
