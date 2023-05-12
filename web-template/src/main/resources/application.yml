@@ -10,8 +10,8 @@ spring:
     active: dev
   config:
     import:
-      - application-${spring.profiles.active}/application-datasource.yml
-      - application-${spring.profiles.active}/application-tomcat.yml
+      - application-${spring.profiles.active}/datasource.yml
+      - application-${spring.profiles.active}/tomcat.yml
   jackson:
     date-format: 'yyyy-MM-dd HH:mm:ss'
     default-property-inclusion: non_null

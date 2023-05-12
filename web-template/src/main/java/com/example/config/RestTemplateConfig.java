@@ -1,7 +1,7 @@
 package com.example.config;
 
 import cn.hutool.core.date.DatePattern;
-import com.example.bean.constants.HttpConstant;
+import com.example.bean.constants.TraceConstant;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -56,13 +56,13 @@ public class RestTemplateConfig {
                     @NonNull byte[] body, @NonNull ClientHttpRequestExecution execution)
                     throws IOException {
 
-                    String traceId = MDC.get(HttpConstant.TRACE_ID);
+                    String traceId = MDC.get(TraceConstant.TRACE_ID);
                     if (traceId == null || traceId.isEmpty()) {
                         traceId = System.currentTimeMillis() + "";
                     }
                     String spanId = System.currentTimeMillis() + "";
 
-                    request.getHeaders().add(HttpConstant.TRACE_ID, traceId);
+                    request.getHeaders().add(TraceConstant.TRACE_ID, traceId);
 
                     return execution.execute(request, body);
                 }
