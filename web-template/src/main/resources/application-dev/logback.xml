@@ -1,17 +1,16 @@
 <configuration>
 
-<!--    <property scope="context" name="PATTERN" value="%date %level [%thread]: %msg%n"/>-->
-    <property scope="context" name="PATTERN"
-        value="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] [%logger#%method:%line] %m%n"/>
+    <variable name="LOG_PATTERN"
+        value="%date{yyyy-MM-dd HH:mm:ss.SSS} %level traceid:%mdc{traceid:''} pspanid:%mdc{pspanid:''} spanid:%mdc{spanid:''} [%thread] [%logger#%method:%line] %m%n"/>
 
-    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>${PATTERN}</pattern>
+            <pattern>${LOG_PATTERN}</pattern>
         </encoder>
     </appender>
 
     <root level="info">
-        <appender-ref ref="Console"/>
+        <appender-ref ref="STDOUT"/>
     </root>
 
 </configuration>

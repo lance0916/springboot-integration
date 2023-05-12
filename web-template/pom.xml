@@ -121,10 +121,6 @@
             <artifactId>mybatis-generator-core</artifactId>
             <version>1.3.7</version>
         </dependency>
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-mysql</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
@@ -140,23 +136,6 @@
                         </exclude>
                     </excludes>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <configuration>
-                    <url>${mybatis.generator.jdbcUrl}</url>
-                    <user>${mybatis.generator.username}</user>
-                    <password>${mybatis.generator.password}</password>
-                    <locations>filesystem:src/main/resources/flyway</locations>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>8.0.31</version>
-                    </dependency>
-                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.mybatis.generator</groupId>

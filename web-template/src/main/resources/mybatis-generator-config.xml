@@ -11,6 +11,8 @@
         <property name="javaFileEncoding" value="UTF-8"/>
 
         <!-- 插件 -->
+        <!--覆盖生成XML文件-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
         <plugin type="com.itfsw.mybatis.generator.plugins.BatchInsertPlugin"/>
         <plugin type="com.itfsw.mybatis.generator.plugins.ModelColumnPlugin"/>
         <plugin type="com.itfsw.mybatis.generator.plugins.SelectOneByExamplePlugin"/>
@@ -31,8 +33,8 @@
             connectionURL="${mybatis.generator.jdbcUrl}"
             userId="${mybatis.generator.username}"
             password="${mybatis.generator.password}"
-            driverClass="com.mysql.cj.jdbc.Driver">
-        </jdbcConnection>
+            driverClass="com.mysql.cj.jdbc.Driver"
+        />
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="true"/>
