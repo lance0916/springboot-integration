@@ -1,9 +1,5 @@
 package com.example;
 
-import com.example.entity.UserInfo;
-import com.example.entity.UserInfo.Column;
-import com.example.entity.UserInfoExample;
-import com.example.entity.UserInfoExample.IExampleWhen;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -28,7 +24,6 @@ public class WebTemplateApplication implements ApplicationRunner, BeanPostProces
     @Override
     public void run(ApplicationArguments args) throws Exception {
         log.info("Hello Web");
-
     }
 
     @Override
