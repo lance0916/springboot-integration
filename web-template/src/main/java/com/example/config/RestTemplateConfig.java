@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.config.ConnectionConfig;
@@ -25,7 +26,6 @@ import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter;
-import org.springframework.lang.NonNull;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -52,17 +52,17 @@ public class RestTemplateConfig {
         restTemplate.setInterceptors(Arrays.asList(
             new ClientHttpRequestInterceptor() {
                 @Override
-                public ClientHttpResponse intercept(@NonNull HttpRequest request,
-                    @NonNull byte[] body, @NonNull ClientHttpRequestExecution execution)
-                    throws IOException {
+                public ClientHttpResponse intercept(HttpRequest request, byte[] body,
+                    ClientHttpRequestExecution execution) throws IOException {
 
+                    // 将 traceid 传递到下游
                     String traceId = MDC.get(TraceConstant.TRACE_ID);
-                    if (traceId == null || traceId.isEmpty()) {
-                        traceId = System.currentTimeMillis() + "";
-                    }
-                    String spanId = System.currentTimeMillis() + "";
-
+                    traceId = traceId == null ? "" : traceId;
                     request.getHeaders().add(TraceConstant.TRACE_ID, traceId);
+
+                    // 将自己的 spanid 传给下游，下游作为 pspanid
+                    String spanId = String.valueOf(System.currentTimeMillis());
+                    request.getHeaders().add(TraceConstant.SPAN_ID, spanId);
 
                     return execution.execute(request, body);
                 }
@@ -94,9 +94,8 @@ public class RestTemplateConfig {
                     .build()
             )
             // 设置连接存活时间，并开启自动关闭
-//                .setConnectionTimeToLive(5, TimeUnit.SECONDS)
-//                .evictExpiredConnections()
-//                .evictIdleConnections(10, TimeUnit.SECONDS)
+            .evictExpiredConnections()
+            .evictIdleConnections(10, TimeUnit.SECONDS)
             // 禁用 cookie
             .disableCookieManagement()
             .build();
