@@ -3,24 +3,50 @@ server:
   shutdown: graceful
   ssl:
     enabled: false
+  tomcat:
+    accept-count: 100
+    max-connections: 8192
+    max-keep-alive-requests: 100
+    threads:
+      max: 200
+      min-spare: 10
+    uri-encoding: UTF-8
+    mbeanregistry:
+      enabled: true
 
 # Spring 配置
 spring:
-  profiles:
-    active: dev
-  config:
-    import:
-      - application-${spring.profiles.active}/datasource.yml
-      - application-${spring.profiles.active}/tomcat.yml
   jackson:
     date-format: 'yyyy-MM-dd HH:mm:ss'
     default-property-inclusion: non_null
     deserialization:
       fail-on-unknown-properties: true
+  datasource:
+    username: root
+    password: admin
+    url: jdbc:mysql://localhost:3306/template?useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 3
+      keepalive-time: 60000
+      register-mbeans: true
+  redis:
+    client-type: lettuce
+    host: localhost
+    port: 6379
+    connect-timeout: 3s
+    lettuce:
+      pool:
+        enabled: true
+        min-idle: 1
+        max-idle: 8
+        max-active: 8
+        max-wait: 1s
+      shutdown-timeout: 3s
 
-# 日志配置
-logging:
-  config: classpath:application-${spring.profiles.active}/logback.xml
+mybatis:
+  mapper-locations: classpath*:/mapper/*.xml
 
 # Knife4j
 knife4j:
