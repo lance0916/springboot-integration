@@ -139,27 +139,27 @@ public class RequestLogFilter extends OncePerRequestFilter {
 
         StringBuilder sb = new StringBuilder();
         sb.append("Method:").append(requestWrapper.getMethod()).append(" ");
-        sb.append("Uri:{}").append(requestWrapper.getRequestURI()).append(" ");
-        sb.append("ContentType:{}").append(requestContentType).append(" ");
+        sb.append("Uri:").append(requestWrapper.getRequestURI()).append(" ");
+        sb.append("ContentType:").append(requestContentType).append(" ");
         if (queryString.length() > 0) {
-            sb.append("UriParam:{}").append(queryString).append(" ");
+            sb.append("UriParam:").append(queryString).append(" ");
         }
         if (formParam.length() > 0) {
-            sb.append("Form:{}").append(formParam).append(" ");
+            sb.append("Form:").append(formParam).append(" ");
         }
         if (requestBody.length() > 0) {
-            sb.append("Body:{}").append(requestBody).append(" ");
+            sb.append("Body:").append(requestBody).append(" ");
         }
         if (requestBody.length() > 0) {
-            sb.append("Body:{}").append(requestBody).append(" ");
+            sb.append("Body:").append(requestBody).append(" ");
         }
         if (responseContentType.length() > 0) {
-            sb.append("RespContentType:{}").append(responseContentType).append(" ");
+            sb.append("RespContentType:").append(responseContentType).append(" ");
         }
         if (responseBody.length() > 0) {
-            sb.append("RespBody:{}").append(responseBody).append(" ");
+            sb.append("RespBody:").append(responseBody).append(" ");
         }
-        sb.append("CostTime:{}").append(costTs).append("(").append(logStopTs - logStartTs).append(")ms");
+        sb.append("CostTime:").append(costTs).append("(").append(logStopTs - logStartTs).append(")ms");
         log.info(sb.toString());
 
         // 写入响应消息到客户端

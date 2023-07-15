@@ -34,6 +34,10 @@ public class TraceFilter extends OncePerRequestFilter {
         String spanid = String.valueOf(System.currentTimeMillis());
         MDC.put(TraceConstant.SPAN_ID, spanid);
 
-        filterChain.doFilter(request, response);
+        try {
+            filterChain.doFilter(request, response);
+        } finally {
+            MDC.clear();
+        }
     }
 }
