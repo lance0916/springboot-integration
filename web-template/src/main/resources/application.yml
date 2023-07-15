@@ -23,7 +23,7 @@ spring:
       fail-on-unknown-properties: true
   datasource:
     username: root
-    password: admin
+    password: root
     url: jdbc:mysql://localhost:3306/template?useUnicode=true&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource

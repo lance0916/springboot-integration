@@ -1,7 +1,9 @@
 package com.example.filter;
 
 import com.example.bean.constants.TraceConstant;
+import java.io.IOException;
 import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.MDC;
@@ -16,7 +18,7 @@ public class TraceFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
-        @NonNull FilterChain filterChain) {
+        @NonNull FilterChain filterChain) throws ServletException, IOException {
 
         // traceId，上游没有传就生成一个
         String traceId = request.getHeader(TraceConstant.TRACE_ID);
@@ -31,5 +33,7 @@ public class TraceFilter extends OncePerRequestFilter {
         // 生成请求在本系统内的唯一 id，spanid
         String spanid = String.valueOf(System.currentTimeMillis());
         MDC.put(TraceConstant.SPAN_ID, spanid);
+
+        filterChain.doFilter(request, response);
     }
 }
