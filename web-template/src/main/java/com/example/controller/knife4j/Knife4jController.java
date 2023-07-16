@@ -6,6 +6,8 @@ import com.example.bean.resp.BaseResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author WuQinglong
  * @since 2023/2/13 17:57
  */
+@Slf4j
 @SwaggerCommonTag
 @Api(tags = "首页模块")
 @RestController

@@ -20,15 +20,15 @@ public class TraceFilter extends OncePerRequestFilter {
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
         @NonNull FilterChain filterChain) throws ServletException, IOException {
 
-        // traceId，上游没有传就生成一个
-        String traceId = request.getHeader(TraceConstant.TRACE_ID);
-        traceId = traceId == null ? "" : traceId;
-        MDC.put(TraceConstant.TRACE_ID, traceId);
+        // traceid，上游没有传就生成一个
+        String traceid = request.getHeader(TraceConstant.TRACE_ID);
+        traceid = traceid == null ? "" : traceid;
+        MDC.put(TraceConstant.TRACE_ID, traceid);
 
         // 获取 spanid，记录为 pspanid
-        String pspanId = request.getHeader(TraceConstant.SPAN_ID);
-        pspanId = pspanId == null ? "" : pspanId;
-        MDC.put(TraceConstant.PSPAN_ID, pspanId);
+        String pspanid = request.getHeader(TraceConstant.SPAN_ID);
+        pspanid = pspanid == null ? "" : pspanid;
+        MDC.put(TraceConstant.PSPAN_ID, pspanid);
 
         // 生成请求在本系统内的唯一 id，spanid
         String spanid = String.valueOf(System.currentTimeMillis());
