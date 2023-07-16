@@ -26,6 +26,7 @@ import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter;
+import org.springframework.lang.NonNull;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -51,9 +52,10 @@ public class RestTemplateConfig {
         ));
         restTemplate.setInterceptors(Arrays.asList(
             new ClientHttpRequestInterceptor() {
+                @NonNull
                 @Override
-                public ClientHttpResponse intercept(HttpRequest request, byte[] body,
-                    ClientHttpRequestExecution execution) throws IOException {
+                public ClientHttpResponse intercept(@NonNull HttpRequest request, @NonNull byte[] body,
+                    @NonNull ClientHttpRequestExecution execution) throws IOException {
 
                     // 将 traceid 传递到下游
                     String traceId = MDC.get(TraceConstant.TRACE_ID);
