@@ -6,9 +6,7 @@
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <layout>
-            <Pattern>
-                %d %level [%thread] traceid:%X{traceid} pspanid:%X{pspanid} spanid:%X{spanid} [%C#%M:%L] %m%n
-            </Pattern>
+            <pattern>${LOG_PATTERN}</pattern>
         </layout>
     </appender>
 
