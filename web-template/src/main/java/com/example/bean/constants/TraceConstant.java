@@ -17,6 +17,11 @@ public interface TraceConstant {
     String PSPAN_ID = "pspanid";
 
     /**
+     * 传给下游的 spanid
+     */
+    String CSPAN_ID = "cspanid";
+
+    /**
      * 请求进入本系统后，生成请求在本系统内的唯一id
      */
     String SPAN_ID = "spanid";

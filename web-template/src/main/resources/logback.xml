@@ -1,8 +1,15 @@
 <configuration>
 
     <!-- pattern格式 https://logback.qos.ch/manual/layouts.html -->
+<!--    <variable name="LOG_PATTERN"-->
+<!--        value="%d %level [%thread] traceid:%X{traceid} pspanid:%X{pspanid} spanid:%X{spanid} [%C#%M:%L] %m%n"/>-->
+
     <variable name="LOG_PATTERN"
-        value="%d %level [%thread] traceid:%X{traceid} pspanid:%X{pspanid} spanid:%X{spanid} [%C#%M:%L] %m%n"/>
+        value="%d %level [%thread] traceid:%X{traceid} pspanid:%X{pspanid} spanid:%X{spanid} [%C#%M:%L] %trace%n"/>
+
+    <!-- 转换为符合日志规范的日志格式，%trace将会替换为 LogbackTraceConverter 中返回的内容 -->
+    <conversionRule conversionWord="trace"
+        converterClass="com.xiaojukeji.ep.rm.common.LogbackTraceConverter"/>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <layout>
