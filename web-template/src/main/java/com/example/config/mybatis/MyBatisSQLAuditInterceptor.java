@@ -134,6 +134,9 @@ public class MyBatisSQLAuditInterceptor implements Interceptor {
      * 转换参数为String类型的值，便于打印
      */
     private static String convertParamToString(Object param) {
+        if (param == null) {
+            return "null";
+        }
         if (param instanceof String) {
             return "'" + param + "'";
         } else if (param instanceof Date) {
