@@ -1,5 +1,6 @@
 package com.example;
 
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -23,7 +24,7 @@ public class WebTemplateApplication implements ApplicationRunner, BeanPostProces
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        log.info("Hello Web");
+        log.error(WebTemplateApplication.class.toString());
     }
 
     @Override

@@ -15,16 +15,17 @@
         <!--业务日志-->
         <RollingRandomAccessFile name="BusinessFile"
             fileName="${LOG_PATH}/business.log"
-            filePattern="${LOG_PATH}/history/business-%d{yyyy-MM-dd}.log.gz">
+            filePattern="${LOG_PATH}/history/business-%d{yyyy-MM-dd}.%i.log.gz">
             <PatternLayout pattern="${LOG_PATTERN}"/>
+            <!-- 不打印 WARN 及以上级别的日志 -->
+            <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="ACCEPT"/>
             <Policies>
-                <TimeBasedTriggeringPolicy interval="1"/>
-                <SizeBasedTriggeringPolicy maxFileSize="1GB"/>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="1 GB"/>
             </Policies>
             <DefaultRolloverStrategy>
-                <!-- 自动删除 7 天之前的日志 -->
                 <Delete basePath="${LOG_PATH}/history" maxDepth="1">
-                    <IfFileName glob="business*.log.zip"/>
+                    <IfFileName glob="business*.log.gz"/>
                     <IfLastModified age="7d"/>
                 </Delete>
             </DefaultRolloverStrategy>
@@ -39,9 +40,9 @@
 <!--        </logger>-->
 
         <!-- 业务日志 -->
-        <root level="INFO">
-            <appenderref ref="Console"/>
-            <appenderref ref="BusinessFile"/>
-        </root>
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="BusinessFile"/>
+        </Root>
     </Loggers>
 </configuration>
