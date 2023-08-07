@@ -30,27 +30,32 @@ public class MxBeanDemo {
     public static void main(String[] args) throws Exception {
         Options opt = new OptionsBuilder()
             .include(MxBeanDemo.class.getSimpleName())
-            .resultFormat(ResultFormatType.JSON)
+//            .resultFormat(ResultFormatType.JSON)
             .build();
         new Runner(opt).run();
     }
 
     @Benchmark
-    public String plus() {
-        String s1 = "abc";
-        String s2 = "def";
-        String s3 = s1 + s2 + "xyz";
-        return s1 + s3 + "000";
+    public void plus() {
+        for (int i = 0; i < 1000; i++) {
+            String s = "abc";
+            s += "def";
+            s += "xyz";
+            s += "000";
+            s += "555";
+        }
     }
 
     @Benchmark
-    public String builder() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("abc");
-        sb.append("def");
-        sb.append(sb).append("xyz");
-        sb.append(sb).append("000");
-        return sb.toString();
+    public void builder() {
+        for (int i = 0; i < 1000; i++) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("abc");
+            sb.append("def");
+            sb.append("xyz");
+            sb.append("000");
+            sb.append("555");
+        }
     }
 
 }
