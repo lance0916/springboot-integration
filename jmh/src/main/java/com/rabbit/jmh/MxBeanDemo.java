@@ -1,5 +1,6 @@
 package com.rabbit.jmh;
 
+import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Measurement;
@@ -14,13 +15,6 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
-import java.lang.management.ManagementFactory;
-import java.lang.management.ThreadInfo;
-import java.lang.management.ThreadMXBean;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
 /**
  * @author WuQinglong
  * @since 2023/2/28 19:20
@@ -34,27 +28,29 @@ import java.util.concurrent.TimeUnit;
 public class MxBeanDemo {
 
     public static void main(String[] args) throws Exception {
-//        Options opt = new OptionsBuilder()
-//                .include(MxBeanDemo.class.getSimpleName())
-//                .result("result.json")
-//                .resultFormat(ResultFormatType.JSON)
-//                .build();
-//        new Runner(opt).run();
+        Options opt = new OptionsBuilder()
+            .include(MxBeanDemo.class.getSimpleName())
+            .resultFormat(ResultFormatType.JSON)
+            .build();
+        new Runner(opt).run();
     }
 
     @Benchmark
-    public void f() {
-        ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
-        Map<Thread.State, Integer> map = new HashMap<>();
+    public String plus() {
+        String s1 = "abc";
+        String s2 = "def";
+        String s3 = s1 + s2 + "xyz";
+        return s1 + s3 + "000";
+    }
 
-        long[] allThreadIds = threadMXBean.getAllThreadIds();
-        for (long threadId : allThreadIds) {
-            threadMXBean.findDeadlockedThreads();
-            ThreadInfo threadInfo = threadMXBean.getThreadInfo(threadId);
-            Thread.State threadState = threadInfo.getThreadState();
-            Integer count = map.getOrDefault(threadState, 0);
-            map.put(threadState, count + 1);
-        }
+    @Benchmark
+    public String builder() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("abc");
+        sb.append("def");
+        sb.append(sb).append("xyz");
+        sb.append(sb).append("000");
+        return sb.toString();
     }
 
 }
