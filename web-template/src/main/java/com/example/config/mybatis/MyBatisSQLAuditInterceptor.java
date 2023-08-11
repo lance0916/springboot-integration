@@ -1,7 +1,9 @@
 package com.example.config.mybatis;
 
+import cn.hutool.core.util.StrUtil;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.cache.CacheKey;
@@ -92,39 +94,45 @@ public class MyBatisSQLAuditInterceptor implements Interceptor {
      */
     private String fillParam(BoundSql boundSql, MappedStatement ms, StopWatch stopWatch) {
         stopWatch.start();
-        // 去掉换行和多于的空格
         String sql = boundSql.getSql();
         try {
-            sql = sql.replaceAll("[\\s\n ]+", " ");
-
+            // 获取每个占位符的参数值
+            List<String> params = new ArrayList<>();
             Configuration configuration = ms.getConfiguration();
             Object parameter = boundSql.getParameterObject();
             MetaObject metaObject = configuration.newMetaObject(parameter);
-
             List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
             for (ParameterMapping parameterMapping : parameterMappings) {
                 if (parameterMapping.getMode() == ParameterMode.OUT) {
                     continue;
                 }
+                Object val;
                 String propertyName = parameterMapping.getProperty();
                 if (isPrimitiveOrPrimitiveWrapper(parameter.getClass())) {
-                    // parameter 是基本数据类型，直接替换
-                    sql = sql.replaceFirst("\\?", convertParamToString(parameter));
+                    val = parameter;
                 } else if (boundSql.hasAdditionalParameter(propertyName)) {
-                    // 动态SQL
-                    Object val = boundSql.getAdditionalParameter(propertyName);
-                    sql = sql.replaceFirst("\\?", convertParamToString(val));
+                    val = boundSql.getAdditionalParameter(propertyName);
                 } else if (metaObject.hasGetter(propertyName)) {
-                    // 对象参数
-                    Object val = metaObject.getValue(propertyName);
-                    sql = sql.replaceFirst("\\?", convertParamToString(val));
+                    val = metaObject.getValue(propertyName);
                 } else {
-                    sql = sql.replaceFirst("\\?", "'!unknown!'");
-                    logger.warn("未知的参数类型，填充为!unknown!");
+                    val = "'!unknown!'";
+                    logger.error("未知的参数类型，填充为!unknown!");
+                }
+                params.add(convertParamToString(val));
+            }
+
+            // 合并 sqlParts 和 params
+            StringBuilder sb = new StringBuilder();
+            String[] sqlParts = sql.split("\\?");
+            for (int i = 0; i < sqlParts.length; i++) {
+                sb.append(sqlParts[i]);
+                if (i < params.size()) {
+                    sb.append(params.get(i));
                 }
             }
+            sql = sb.toString();
         } catch (Exception e) {
-            logger.error("填充SQL参数异常, errMsg:{}", e.getMessage());
+            logger.error("填充SQL参数异常", e);
         }
         stopWatch.stop();
         return sql;
