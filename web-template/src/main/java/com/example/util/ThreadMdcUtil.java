@@ -13,6 +13,8 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.util.concurrent.ListenableFuture;
@@ -22,6 +24,8 @@ import org.springframework.util.concurrent.ListenableFuture;
  * @author WuQinglong
  */
 public class ThreadMdcUtil {
+
+    public static final Logger LOGGER = LoggerFactory.getLogger(ThreadMdcUtil.class);
 
     public static void setTraceIdIfAbsent() {
         if (MDC.get(TraceConstant.TRACE_ID) == null) {
@@ -47,6 +51,9 @@ public class ThreadMdcUtil {
             setTraceIdIfAbsent();
             try {
                 return callable.call();
+            } catch (Exception e) {
+                LOGGER.error("线程内发生异常", e);
+                throw e;
             } finally {
                 MDC.clear();
             }
@@ -63,6 +70,9 @@ public class ThreadMdcUtil {
             setTraceIdIfAbsent();
             try {
                 runnable.run();
+            } catch (Exception e) {
+                LOGGER.error("线程内发生异常", e);
+                throw e;
             } finally {
                 MDC.clear();
             }
