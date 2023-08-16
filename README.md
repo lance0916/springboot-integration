@@ -4,9 +4,10 @@
 - Knife4j（Swagger）
   - 配置类：[Knife4jConfig.java](web-template%2Fsrc%2Fmain%2Fjava%2Fcom%2Fexample%2Fconfig%2FKnife4jConfig.java)
   - 示例Controller：[Knife4jController.java](web-template%2Fsrc%2Fmain%2Fjava%2Fcom%2Fexample%2Fcontroller%2Fknife4j%2FKnife4jController.java)
-- 日志模版配置
+- 日志
   - logback：[logback-template.xml](web-template%2Fsrc%2Fmain%2Fresources%2Flogback-template.xml)
-  - log4j：[log4j2-template.xml](web-template%2Fsrc%2Fmain%2Fresources%2Flog4j2-template.xml)
+  - log4j2：[log4j2-template.xml](web-template%2Fsrc%2Fmain%2Fresources%2Flog4j2-template.xml)
+  - log4j2支持自定义pattern关键字[TracePatternConverter.java](web-template%2Fsrc%2Fmain%2Fjava%2Fcom%2Fexample%2Fconfig%2Flog4j2%2FTracePatternConverter.java)
 - 分布式链路日志追踪
   - 配置 [TraceFilter.java](web-template%2Fsrc%2Fmain%2Fjava%2Fcom%2Fexample%2Ffilter%2FTraceFilter.java) 已进行 traceid、pspanid、spanid 的解析与生成
   - RestTemplate 支持往下传递 traceid、spanid
@@ -21,3 +22,5 @@
   - SpringMVCUtil，获取 HttpServletRequest 和 HttpServletResponse。[SpringMVCUtil.java](web-template%2Fsrc%2Fmain%2Fjava%2Fcom%2Fexample%2Futil%2FSpringMVCUtil.java)
 - 健康检查接口
   - [HealthCheckController.java](web-template%2Fsrc%2Fmain%2Fjava%2Fcom%2Fexample%2Fcontroller%2FHealthCheckController.java)
+- MyBatis 打印 SQL
+  - [MyBatisSQLAuditInterceptor.java](web-template%2Fsrc%2Fmain%2Fjava%2Fcom%2Fexample%2Fconfig%2Fmybatis%2FMyBatisSQLAuditInterceptor.java)

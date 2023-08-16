@@ -24,6 +24,9 @@ public class MyBatisConfig {
         // mapper.xml 文件位置
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:mapper/*.xml"));
+
+        sqlSessionFactoryBean.setPlugins(new MyBatisSQLAuditInterceptor());
+
         return sqlSessionFactoryBean.getObject();
     }
 
