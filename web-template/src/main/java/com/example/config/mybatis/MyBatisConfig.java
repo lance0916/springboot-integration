@@ -1,6 +1,5 @@
 package com.example.config.mybatis;
 
-import com.example.config.mybatis.MyBatisSQLAuditInterceptor;
 import javax.sql.DataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;

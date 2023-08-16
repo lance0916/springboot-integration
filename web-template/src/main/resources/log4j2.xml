@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<configuration>
+<configuration package="com.example.config.log4j2">
     <properties>
         <property name="LOG_PATH">${env:LOG_PATH:-./logs}</property>
         <property name="LOG_PATTERN">

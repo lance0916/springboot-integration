@@ -1,47 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<configuration>
-    <properties>
-        <property name="LOG_PATH">${env:LOG_PATH:-./logs}</property>
-        <property name="LOG_PATTERN">
-            %d %p %t traceid:%X{traceid} pspanid:%X{pspanid} spanid:%X{spanid} %c#%M:%L %msg%n
-        </property>
-    </properties>
+<Configuration package="com.xiaojukeji.ep.rm.common.log4j2">
+    <Properties>
+<!--        <Property name="logPath">${sys:LOG_PATH:-./logs}</Property>-->
+        <Property name="logPath">${env:LOG_PATH:-./logs}</Property>
+        <Property name="normalPattern">
+            [%level][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}][%C#%M:%L] %dltag||traceid=%X{traceid}||spanid=%X{spanid}||thread=%thread||_msg=%msg%n
+        </Property>
+        <Property name="consolePattern">
+            %highlight{[%level]} %d{HH:mm:ss.SSS} [%thread] %cyan{%C#%M:%L} %msg%n
+        </Property>
+    </Properties>
 
-    <appenders>
-        <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="${LOG_PATTERN}"/>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${consolePattern}"/>
         </Console>
 
-        <!--业务日志-->
-        <RollingRandomAccessFile name="BusinessFile"
-            fileName="${LOG_PATH}/business.log"
-            filePattern="${LOG_PATH}/history/business-%d{yyyy-MM-dd}.log.gz">
-            <PatternLayout pattern="${LOG_PATTERN}"/>
+        <!--
+            默认日志
+            每个日志文件最大1G，每日最多保留2个文件，每日文件最大2G
+            会保留30天，30天的日志压缩后大约占用6G，再加上当日文件最大值2G，总共占用8G
+        -->
+        <RollingRandomAccessFile name="fileDefault"
+            fileName="${logPath}/default.log"
+            filePattern="${logPath}/history/default-%d{yyyy-MM-dd}.%i.log.gz">
+            <PatternLayout pattern="${normalPattern}"/>
             <Policies>
-                <TimeBasedTriggeringPolicy interval="1"/>
-                <SizeBasedTriggeringPolicy maxFileSize="1GB"/>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="1 GB"/>
             </Policies>
-            <DefaultRolloverStrategy>
-                <!-- 自动删除 7 天之前的日志 -->
-                <Delete basePath="${LOG_PATH}/history" maxDepth="1">
-                    <IfFileName glob="business*.log.zip"/>
-                    <IfLastModified age="7d"/>
+            <DefaultRolloverStrategy max="2">
+                <Delete basePath="${logPath}/history" maxDepth="1">
+                    <IfFileName glob="default*.log.gz"/>
+                    <IfLastModified age="30d"/>
                 </Delete>
             </DefaultRolloverStrategy>
         </RollingRandomAccessFile>
 
-    </appenders>
+    </Appenders>
 
     <Loggers>
-
-<!--        <logger name="mapper" level="DEBUG" additivity="false">-->
-<!--            <appenderref ref="BusinessFile"/>-->
-<!--        </logger>-->
-
-        <!-- 业务日志 -->
-        <root level="INFO">
-            <appenderref ref="Console"/>
-            <appenderref ref="BusinessFile"/>
-        </root>
+        <Root level="INFO">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="fileDefault"/>
+        </Root>
     </Loggers>
-</configuration>
+</Configuration>
