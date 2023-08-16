@@ -1,4 +1,4 @@
-package com.example.filter;
+package com.example.config.filter;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 

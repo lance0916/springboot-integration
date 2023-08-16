@@ -1,7 +1,7 @@
 package com.example.config;
 
-import com.example.filter.RequestLogFilter;
-import com.example.filter.TraceFilter;
+import com.example.config.filter.RequestLogFilter;
+import com.example.config.filter.TraceFilter;
 import javax.servlet.DispatcherType;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

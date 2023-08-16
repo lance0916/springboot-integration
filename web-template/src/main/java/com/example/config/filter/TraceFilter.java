@@ -1,4 +1,4 @@
-package com.example.filter;
+package com.example.config.filter;
 
 import com.example.bean.constants.TraceConstant;
 import java.io.IOException;
