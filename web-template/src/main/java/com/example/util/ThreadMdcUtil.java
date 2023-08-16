@@ -28,17 +28,33 @@ public class ThreadMdcUtil {
     public static final Logger LOGGER = LoggerFactory.getLogger(ThreadMdcUtil.class);
 
     public static void setTraceIdIfAbsent() {
-        if (MDC.get(TraceConstant.TRACE_ID) == null) {
-            MDC.put(TraceConstant.TRACE_ID, TraceUtil.generateTraceId());
+        if (MDC.get(TraceConstant.TRACEID) == null) {
+            MDC.put(TraceConstant.TRACEID, TraceUtil.generateTraceId());
         }
     }
 
     public static void setTraceId() {
-        MDC.put(TraceConstant.TRACE_ID, TraceUtil.generateTraceId());
+        MDC.put(TraceConstant.TRACEID, TraceUtil.generateTraceId());
     }
 
     public static void setTraceId(String traceId) {
-        MDC.put(TraceConstant.TRACE_ID, traceId);
+        MDC.put(TraceConstant.TRACEID, traceId);
+    }
+
+    public static String getTraceId() {
+        return MDC.get(TraceConstant.TRACEID);
+    }
+
+    public static void setSpanId() {
+        MDC.put(TraceConstant.SPANID, TraceUtil.generateSpanId());
+    }
+
+    public static void setSpanId(String spanId) {
+        MDC.put(TraceConstant.SPANID, spanId);
+    }
+
+    public static String getSpanId() {
+        return MDC.get(TraceConstant.SPANID);
     }
 
     public static <T> Callable<T> wrap(final Callable<T> callable, final Map<String, String> context) {

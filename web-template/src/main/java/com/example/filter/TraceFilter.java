@@ -21,18 +21,18 @@ public class TraceFilter extends OncePerRequestFilter {
         @NonNull FilterChain filterChain) throws ServletException, IOException {
 
         // traceid，上游没有传就生成一个
-        String traceid = request.getHeader(TraceConstant.TRACE_ID);
+        String traceid = request.getHeader(TraceConstant.TRACEID);
         traceid = traceid == null ? "" : traceid;
-        MDC.put(TraceConstant.TRACE_ID, traceid);
+        MDC.put(TraceConstant.TRACEID, traceid);
 
         // 获取 spanid，记录为 pspanid
-        String pspanid = request.getHeader(TraceConstant.SPAN_ID);
+        String pspanid = request.getHeader(TraceConstant.SPANID);
         pspanid = pspanid == null ? "" : pspanid;
-        MDC.put(TraceConstant.PSPAN_ID, pspanid);
+        MDC.put(TraceConstant.PSPANID, pspanid);
 
         // 生成请求在本系统内的唯一 id，spanid
         String spanid = String.valueOf(System.currentTimeMillis());
-        MDC.put(TraceConstant.SPAN_ID, spanid);
+        MDC.put(TraceConstant.SPANID, spanid);
 
         try {
             filterChain.doFilter(request, response);

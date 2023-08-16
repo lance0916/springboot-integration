@@ -58,13 +58,13 @@ public class RestTemplateConfig {
                     @NonNull ClientHttpRequestExecution execution) throws IOException {
 
                     // 将 traceid 传递到下游
-                    String traceId = MDC.get(TraceConstant.TRACE_ID);
+                    String traceId = MDC.get(TraceConstant.TRACEID);
                     traceId = traceId == null ? "" : traceId;
-                    request.getHeaders().add(TraceConstant.TRACE_ID, traceId);
+                    request.getHeaders().add(TraceConstant.TRACEID, traceId);
 
                     // 将自己的 spanid 传给下游，下游作为 pspanid
                     String spanId = String.valueOf(System.currentTimeMillis());
-                    request.getHeaders().add(TraceConstant.SPAN_ID, spanId);
+                    request.getHeaders().add(TraceConstant.SPANID, spanId);
 
                     return execution.execute(request, body);
                 }
