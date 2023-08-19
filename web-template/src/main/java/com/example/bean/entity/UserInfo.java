@@ -1,4 +1,4 @@
-package com.example.entity;
+package com.example.bean.entity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

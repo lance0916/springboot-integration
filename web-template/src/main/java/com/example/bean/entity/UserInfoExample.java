@@ -1,4 +1,4 @@
-package com.example.entity;
+package com.example.bean.entity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -549,6 +549,6 @@ public class UserInfoExample {
     }
 
     public interface IExampleWhen {
-        void example(com.example.entity.UserInfoExample example);
+        void example(UserInfoExample example);
     }
 }

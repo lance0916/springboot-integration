@@ -1,7 +1,7 @@
 package com.example.mapper;
 
-import com.example.entity.UserInfo;
-import com.example.entity.UserInfoExample;
+import com.example.bean.entity.UserInfo;
+import com.example.bean.entity.UserInfoExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
