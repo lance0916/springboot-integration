@@ -21,6 +21,7 @@
     <modules>
         <module>jmh</module>
         <module>example</module>
+        <module>jsoup</module>
         <module>web-template</module>
         <module>mongo</module>
         <module>sentinel</module>
