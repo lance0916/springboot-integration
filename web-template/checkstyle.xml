@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+        "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+        "http://checkstyle.sourceforge.net/dtds/configuration_1_3.dtd">
+
+<!-- document https://checkstyle.sourceforge.io/checks.html -->
+
+<module name="Checker">
+    <property name="charset" value="UTF-8"/>
+    <property name="severity" value="error"/>
+    <property name="fileExtensions" value="java"/>
+
+    <module name="TreeWalker">
+        <!-- Annotations -->
+        <module name="AnnotationLocation">
+            <property name="tokens" value="METHOD_DEF"/>
+            <property name="allowSamelineMultipleAnnotations" value="false"/>
+            <property name="allowSamelineSingleParameterlessAnnotation" value="false"/>
+            <property name="allowSamelineParameterizedAnnotation" value="false"/>
+        </module>
+        <module name="MissingDeprecated"/>
+        <module name="MissingOverride"/>
+        <module name="SuppressWarnings"/>
+
+        <!-- Block Checks -->
+        <module name="AvoidNestedBlocks">
+            <property name="allowInSwitchCase" value="true"/>
+        </module>
+        <module name="EmptyBlock"/>
+        <module name="EmptyCatchBlock">
+            <property name="exceptionVariableName" value="expected|ignore"/>
+        </module>
+        <module name="LeftCurly"/>
+        <module name="RightCurly"/>
+
+        <!-- Class Design -->
+
+        <!-- Coding -->
+        <module name="AvoidDoubleBraceInitialization"/>
+        <module name="DefaultComesLast"/>
+        <module name="EmptyStatement"/>
+        <module name="EqualsAvoidNull"/>
+        <module name="InnerAssignment"/>
+        <module name="MissingSwitchDefault"/>
+        <module name="MultipleVariableDeclarations"/>
+        <module name="NestedForDepth">
+            <property name="max" value="3"/>
+        </module>
+        <module name="NestedIfDepth">
+            <property name="max" value="3"/>
+        </module>
+        <module name="NestedTryDepth">
+            <property name="max" value="3"/>
+        </module>
+        <module name="NoArrayTrailingComma"/>
+        <module name="NoFinalizer"/>
+        <module name="OneStatementPerLine"/>
+        <module name="PackageDeclaration"/>
+
+    </module>
+</module>

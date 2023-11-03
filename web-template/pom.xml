@@ -141,6 +141,12 @@
             <artifactId>mybatis-generator-core</artifactId>
             <version>1.3.7</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>2.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -169,6 +175,36 @@
                     <verbose>true</verbose>
                     <includeAllDependencies>true</includeAllDependencies>
                 </configuration>
+            </plugin>
+            <!-- 配置参考 http://maven.apache.org/plugins/maven-checkstyle-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <configLocation>checkstyle.xml</configLocation>
+                </configuration>
+<!--                <dependencies>-->
+<!--                    <dependency>-->
+<!--                        <groupId>com.puppycrawl.tools</groupId>-->
+<!--                        <artifactId>checkstyle</artifactId>-->
+<!--                        <version>8.0</version>-->
+<!--                    </dependency>-->
+<!--                </dependencies>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>validate</id>-->
+<!--                        <phase>validate</phase>-->
+<!--                        <configuration>-->
+<!--                            &lt;!&ndash; 暂不启用 &ndash;&gt;-->
+<!--                            <skip>false</skip>-->
+<!--                            <failsOnError>true</failsOnError>-->
+<!--                        </configuration>-->
+<!--                        <goals>-->
+<!--                            <goal>check</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
             </plugin>
         </plugins>
     </build>

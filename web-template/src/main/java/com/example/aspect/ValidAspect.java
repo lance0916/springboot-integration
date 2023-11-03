@@ -44,7 +44,7 @@ public class ValidAspect {
 
         // TODO OpenApi 的校验方式实现
         if (clazz.isAnnotationPresent(ValidOpenApi.class) || method.isAnnotationPresent(ValidOpenApi.class)) {
-
+            System.out.println("TODO");
         }
 
         throw new RuntimeException("未标注明确的验签方式");
