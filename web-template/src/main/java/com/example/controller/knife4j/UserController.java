@@ -1,5 +1,7 @@
 package com.example.controller.knife4j;
 
+import java.util.List;
+
 import com.example.aspect.annotation.SwaggerUserTag;
 import com.example.bean.resp.BaseResp;
 import com.example.bean.vo.UserVO;
@@ -7,7 +9,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

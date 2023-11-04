@@ -1,8 +1,9 @@
 package com.example.config;
 
+import javax.servlet.DispatcherType;
+
 import com.example.config.filter.RequestLogFilter;
 import com.example.config.filter.TraceFilter;
-import javax.servlet.DispatcherType;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

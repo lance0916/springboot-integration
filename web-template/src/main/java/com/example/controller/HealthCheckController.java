@@ -46,7 +46,7 @@ public class HealthCheckController {
      * 09704be6-11a4-4b24-b421-aa2e1b8855b7
      */
     @PutMapping(path = "/status", consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = MediaType.APPLICATION_JSON_VALUE)
+        produces = MediaType.APPLICATION_JSON_VALUE)
     public String updateStatus(@Validated @RequestBody Status status) {
         // 校验 secureKey
         if (!SECURE_KEY.equals(status.getSecureKey())) {

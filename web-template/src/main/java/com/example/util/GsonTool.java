@@ -1,15 +1,24 @@
-package com.example.common.tools;
-
-import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
+package com.example.util;
 
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+import com.google.gson.reflect.TypeToken;
+
 /**
  * 使用 Gson 进行 JSON 数据的序列化、反序列化
+ *
  * @author WuQinglong
  */
 public class GsonTool {
@@ -18,13 +27,14 @@ public class GsonTool {
      * 实例化
      */
     private static final Gson GSON = new GsonBuilder()
-            .setDateFormat("yyyy-MM-dd HH:mm:ss")
-            .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
-            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
-            .create();
+        .setDateFormat("yyyy-MM-dd HH:mm:ss")
+        .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+        .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+        .create();
 
     /**
      * 将对象转为 String 类型的 Json
+     *
      * @param value 待转换的对象
      * @return JSON数据
      */
@@ -34,6 +44,7 @@ public class GsonTool {
 
     /**
      * 读取 Json 数据转为对象
+     *
      * @param json  Json数据
      * @param clazz 对象类型
      * @param <T>   对象泛型
@@ -45,6 +56,7 @@ public class GsonTool {
 
     /**
      * 读取 Json 数据转为对象
+     *
      * @param json      Json数据
      * @param typeToken 类型
      * @param <T>       外部类
@@ -60,15 +72,18 @@ public class GsonTool {
     public static class LocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
         //序列化
         @Override
-        public JsonElement serialize(LocalDateTime localDateTime, Type type, JsonSerializationContext jsonSerializationContext) {
+        public JsonElement serialize(LocalDateTime localDateTime, Type type,
+            JsonSerializationContext jsonSerializationContext) {
             return new JsonPrimitive(localDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
         }
 
         //反序列化
         @Override
-        public LocalDateTime deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext)
-                throws JsonParseException {
-            return LocalDateTime.parse(jsonElement.getAsJsonPrimitive().getAsString(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        public LocalDateTime deserialize(JsonElement jsonElement, Type type,
+            JsonDeserializationContext jsonDeserializationContext)
+            throws JsonParseException {
+            return LocalDateTime.parse(jsonElement.getAsJsonPrimitive().getAsString(),
+                DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         }
     }
 
@@ -78,14 +93,16 @@ public class GsonTool {
     public static class LocalDateAdapter implements JsonSerializer<LocalDate>, JsonDeserializer<LocalDate> {
         //序列化
         @Override
-        public JsonElement serialize(LocalDate localDate, Type type, JsonSerializationContext jsonSerializationContext) {
+        public JsonElement serialize(LocalDate localDate, Type type,
+            JsonSerializationContext jsonSerializationContext) {
             return new JsonPrimitive(localDate.format(DateTimeFormatter.ISO_DATE));
         }
 
         //反序列化
         @Override
-        public LocalDate deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext)
-                throws JsonParseException {
+        public LocalDate deserialize(JsonElement jsonElement, Type type,
+            JsonDeserializationContext jsonDeserializationContext)
+            throws JsonParseException {
             return LocalDate.parse(jsonElement.getAsJsonPrimitive().getAsString(), DateTimeFormatter.ISO_DATE);
         }
     }

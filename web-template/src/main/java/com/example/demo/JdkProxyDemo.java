@@ -35,9 +35,9 @@ public class JdkProxyDemo {
         public Object createProxy(Object proxiedObject) {
             DynamicProxyHandler handler = new DynamicProxyHandler(proxiedObject);
             return Proxy.newProxyInstance(
-                    proxiedObject.getClass().getClassLoader(),
-                    proxiedObject.getClass().getInterfaces(),
-                    handler);
+                proxiedObject.getClass().getClassLoader(),
+                proxiedObject.getClass().getInterfaces(),
+                handler);
         }
 
         public static class DynamicProxyHandler implements InvocationHandler {

@@ -10,6 +10,7 @@ import org.slf4j.MDC;
 /**
  * 自定义 log4j2 的 pattern 关键字
  * 需要在 log4j2.xml 文件的 configuration 标签中加入属性 package="com.example.config.log4j2" 才会生效
+ *
  * @author WuQinglong
  * @since 2023/8/8 10:14
  */

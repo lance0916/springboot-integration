@@ -1,6 +1,5 @@
 package com.example.util;
 
-import com.example.bean.constants.TraceConstant;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
@@ -13,6 +12,8 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
+import com.example.bean.constants.TraceConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -21,6 +22,7 @@ import org.springframework.util.concurrent.ListenableFuture;
 
 /**
  * 对线程进行包装，使traceId可以传入线程池。
+ *
  * @author WuQinglong
  */
 public class ThreadMdcUtil {

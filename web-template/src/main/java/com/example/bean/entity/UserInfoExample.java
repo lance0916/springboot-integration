@@ -50,7 +50,7 @@ public class UserInfoExample {
         return this;
     }
 
-    public UserInfoExample orderBy(String ... orderByClauses) {
+    public UserInfoExample orderBy(String... orderByClauses) {
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < orderByClauses.length; i++) {
             sb.append(orderByClauses[i]);

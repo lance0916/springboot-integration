@@ -1,8 +1,9 @@
 package com.example.mapper;
 
+import java.util.List;
+
 import com.example.bean.entity.UserInfo;
 import com.example.bean.entity.UserInfoExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,13 +21,15 @@ public interface UserInfoMapper {
 
     UserInfo selectOneByExample(UserInfoExample example);
 
-    UserInfo selectOneByExampleSelective(@Param("example") UserInfoExample example, @Param("selective") UserInfo.Column ... selective);
+    UserInfo selectOneByExampleSelective(@Param("example") UserInfoExample example,
+        @Param("selective") UserInfo.Column... selective);
 
-    List<UserInfo> selectByExampleSelective(@Param("example") UserInfoExample example, @Param("selective") UserInfo.Column ... selective);
+    List<UserInfo> selectByExampleSelective(@Param("example") UserInfoExample example,
+        @Param("selective") UserInfo.Column... selective);
 
     List<UserInfo> selectByExample(UserInfoExample example);
 
-    UserInfo selectByPrimaryKeySelective(@Param("id") Integer id, @Param("selective") UserInfo.Column ... selective);
+    UserInfo selectByPrimaryKeySelective(@Param("id") Integer id, @Param("selective") UserInfo.Column... selective);
 
     UserInfo selectByPrimaryKey(Integer id);
 
@@ -40,5 +43,5 @@ public interface UserInfoMapper {
 
     int batchInsert(@Param("list") List<UserInfo> list);
 
-    int batchInsertSelective(@Param("list") List<UserInfo> list, @Param("selective") UserInfo.Column ... selective);
+    int batchInsertSelective(@Param("list") List<UserInfo> list, @Param("selective") UserInfo.Column... selective);
 }

@@ -98,7 +98,7 @@ public class UserInfo {
             return this.getEscapedColumnName() + " ASC";
         }
 
-        public static Column[] excludes(Column ... excludes) {
+        public static Column[] excludes(Column... excludes) {
             ArrayList<Column> columns = new ArrayList<>(Arrays.asList(Column.values()));
             if (excludes != null && excludes.length > 0) {
                 columns.removeAll(new ArrayList<>(Arrays.asList(excludes)));
@@ -112,7 +112,8 @@ public class UserInfo {
 
         public String getEscapedColumnName() {
             if (this.isColumnNameDelimited) {
-                return new StringBuilder().append(BEGINNING_DELIMITER).append(this.column).append(ENDING_DELIMITER).toString();
+                return new StringBuilder().append(BEGINNING_DELIMITER).append(this.column).append(
+                    ENDING_DELIMITER).toString();
             } else {
                 return this.column;
             }

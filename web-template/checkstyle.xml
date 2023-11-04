@@ -6,9 +6,23 @@
 <!-- document https://checkstyle.sourceforge.io/checks.html -->
 
 <module name="Checker">
-    <property name="charset" value="UTF-8"/>
-    <property name="severity" value="error"/>
-    <property name="fileExtensions" value="java"/>
+<!--    <property name="basedir" value="src"/>-->
+    <property name="fileExtensions" value="java,properties"/>
+    <property name="tabWidth" value="4"/>
+
+    <module name="LineLength">
+        <property name="max" value="120"/>
+        <property name="fileExtensions" value="java"/>
+    </module>
+    <module name="FileLength">
+        <property name="max" value="2000"/>
+    </module>
+    <module name="FileTabCharacter"/>
+    <module name="Translation">
+        <property name="baseName" value="^messages.*$"/>
+        <property name="fileExtensions" value="properties, translations"/>
+    </module>
+    <module name="UniqueProperties"/>
 
     <module name="TreeWalker">
         <!-- Annotations -->
@@ -56,6 +70,142 @@
         <module name="NoFinalizer"/>
         <module name="OneStatementPerLine"/>
         <module name="PackageDeclaration"/>
+        <module name="RequireThis"/>
+        <module name="SimplifyBooleanExpression"/>
+        <module name="SimplifyBooleanReturn"/>
+        <module name="StringLiteralEquality"/>
+        <module name="UnnecessarySemicolonAfterOuterTypeDeclaration"/>
+        <module name="UnnecessarySemicolonAfterTypeMemberDeclaration"/>
+        <module name="UnnecessarySemicolonInTryWithResources"/>
+        <module name="UnnecessarySemicolonInEnumeration"/>
+        <module name="UnusedLocalVariable"/>
+        <module name="VariableDeclarationUsageDistance">
+            <property name="allowedDistance" value="5"/>
+        </module>
+
+        <!-- Headers -->
+
+        <!-- Imports -->
+        <module name="AvoidStarImport"/>
+        <module name="CustomImportOrder">
+            <property name="customImportOrderRules"
+                      value="STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###STATIC"/>
+        </module>
+        <module name="RedundantImport"/>
+        <module name="UnusedImports"/>
+
+        <!-- Javadoc Comments -->
+        <module name="InvalidJavadocPosition"/>
+        <module name="JavadocContentLocationCheck"/>
+        <module name="JavadocMissingLeadingAsterisk"/>
+        <module name="JavadocMissingWhitespaceAfterAsterisk"/>
+        <module name="SingleLineJavadoc"/>
+
+        <!-- Metrics -->
+<!--        <module name="BooleanExpressionComplexity"/>-->
+
+        <!-- Miscellaneous -->
+        <module name="ArrayTypeStyle"/>
+        <module name="AvoidEscapedUnicodeCharacters"/>
+        <module name="CommentsIndentation">
+            <property name="tokens" value="BLOCK_COMMENT_BEGIN"/>
+        </module>
+        <!-- To configure the check to produce a violation on an empty statement -->
+        <module name="DescendantToken">
+            <property name="tokens" value="EMPTY_STAT"/>
+            <property name="limitedTokens" value="EMPTY_STAT"/>
+            <property name="maximumNumber" value="0"/>
+            <property name="maximumDepth" value="0"/>
+            <property name="maximumMessage" value="Empty statement is not allowed."/>
+        </module>
+        <!-- To configure the check to produce a violation on comparing this with null -->
+        <module name="DescendantToken">
+            <property name="tokens" value="EQUAL,NOT_EQUAL"/>
+            <property name="limitedTokens" value="LITERAL_THIS,LITERAL_NULL"/>
+            <property name="maximumNumber" value="1"/>
+            <property name="maximumDepth" value="1"/>
+            <property name="sumTokenCounts" value="true"/>
+        </module>
+        <module name="Indentation"/>
+<!--        <module name="NoCodeInFile"/>-->
+        <module name="OuterTypeFilename"/>
+        <module name="TodoComment"/>
+        <module name="UpperEll"/>
+
+        <!-- Naming Conventions -->
+        <module name="AbbreviationAsWordInName"/>
+<!--        <module name="AbstractClassName"/>-->
+        <module name="CatchParameterName"/>
+        <module name="ClassTypeParameterName"/>
+<!--        <module name="ConstantName"/>-->
+        <module name="InterfaceTypeParameterName"/>
+        <module name="LambdaParameterName"/>
+        <module name="LocalFinalVariableName"/>
+        <module name="LocalVariableName"/>
+        <module name="MemberName"/>
+        <module name="MethodName"/>
+        <module name="MethodTypeParameterName"/>
+        <module name="PackageName"/>
+        <module name="ParameterName"/>
+        <module name="RecordComponentName"/>
+        <module name="RecordTypeParameterName"/>
+        <module name="StaticVariableName"/>
+        <module name="TypeName"/>
+
+        <!-- Regexp -->
+<!--        <module name="Regexp">-->
+<!--            <property name="format" value="System\.out\.println"/>-->
+<!--            <property name="illegalPattern" value="true"/>-->
+<!--            <property name="ignoreComments" value="true"/>-->
+<!--        </module>-->
+
+        <!-- Size Violations -->
+        <module name="AnonInnerLength">
+            <property name="max" value="60"/>
+        </module>
+        <module name="LambdaBodyLength">
+            <property name="max" value="30"/>
+        </module>
+        <module name="MethodLength">
+            <property name="tokens" value="METHOD_DEF"/>
+            <property name="max" value="300"/>
+            <property name="countEmpty" value="false"/>
+        </module>
+        <module name="OuterTypeNumber">
+            <property name="max" value="2"/>
+        </module>
+        <module name="ParameterNumber">
+            <property name="max" value="10"/>
+            <property name="tokens" value="METHOD_DEF"/>
+        </module>
+        <module name="RecordComponentNumber">
+            <property name="max" value="10"/>
+        </module>
+
+        <!-- Whitespace -->
+        <module name="EmptyForInitializerPad"/>
+        <module name="EmptyForIteratorPad"/>
+        <module name="EmptyLineSeparator">
+            <property name="allowNoEmptyLineBetweenFields" value="true"/>
+        </module>
+        <module name="GenericWhitespace"/>
+        <module name="MethodParamPad">
+            <property name="allowLineBreaks" value="true"/>
+        </module>
+        <module name="NoLineWrap"/>
+        <module name="NoWhitespaceAfter"/>
+        <module name="NoWhitespaceBefore"/>
+        <module name="NoWhitespaceBeforeCaseDefaultColon"/>
+        <module name="OperatorWrap"/>
+        <module name="ParenPad"/>
+        <module name="SeparatorWrap">
+            <property name="tokens" value="DOT"/>
+            <property name="option" value="nl"/>
+        </module>
+        <module name="SingleSpaceSeparator"/>
+        <module name="TypecastParenPad"/>
+        <module name="WhitespaceAfter"/>
+        <module name="WhitespaceAround"/>
 
     </module>
 </module>

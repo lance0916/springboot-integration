@@ -1,5 +1,7 @@
 package com.example.aspect;
 
+import java.lang.reflect.Method;
+
 import com.example.aspect.annotation.NoValid;
 import com.example.aspect.annotation.ValidLogin;
 import com.example.aspect.annotation.ValidOpenApi;
@@ -8,8 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.reflect.MethodSignature;
-
-import java.lang.reflect.Method;
 
 /**
  * 拦截所有的 controller 进行鉴权

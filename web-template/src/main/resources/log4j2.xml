@@ -14,13 +14,13 @@
 
         <!--业务日志-->
         <RollingRandomAccessFile name="BusinessFile"
-            fileName="${LOG_PATH}/business.log"
-            filePattern="${LOG_PATH}/history/business-%d{yyyy-MM-dd}.%i.log.gz">
+                                 fileName="${LOG_PATH}/business.log"
+                                 filePattern="${LOG_PATH}/history/business-%d{yyyy-MM-dd}.%i.log.gz">
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <!-- 不打印 WARN 及以上级别的日志 -->
             <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="ACCEPT"/>
             <Policies>
-                <TimeBasedTriggeringPolicy />
+                <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="1 GB"/>
             </Policies>
             <DefaultRolloverStrategy>
@@ -35,9 +35,9 @@
 
     <Loggers>
 
-<!--        <logger name="mapper" level="DEBUG" additivity="false">-->
-<!--            <appenderref ref="BusinessFile"/>-->
-<!--        </logger>-->
+        <!--        <logger name="mapper" level="DEBUG" additivity="false">-->
+        <!--            <appenderref ref="BusinessFile"/>-->
+        <!--        </logger>-->
 
         <!-- 业务日志 -->
         <Root level="INFO">

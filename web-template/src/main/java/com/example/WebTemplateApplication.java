@@ -1,6 +1,5 @@
 package com.example;
 
-import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;

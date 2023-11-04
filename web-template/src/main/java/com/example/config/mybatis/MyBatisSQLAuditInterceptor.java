@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
@@ -29,8 +30,7 @@ import org.springframework.util.StopWatch;
 @SuppressWarnings("rawtypes")
 @Intercepts({
     @Signature(type = Executor.class, method = MyBatisSQLAuditInterceptor.QUERY_METHOD_NAME,
-        args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}
-    ),
+        args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),
     @Signature(type = Executor.class, method = MyBatisSQLAuditInterceptor.QUERY_METHOD_NAME,
         args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class,
             CacheKey.class, BoundSql.class}),
@@ -158,11 +158,11 @@ public class MyBatisSQLAuditInterceptor implements Interceptor {
      * 是否是基本数据类型
      */
     private static boolean isPrimitiveOrPrimitiveWrapper(Class<?> clazz) {
-        return clazz.isPrimitive() ||
-            clazz.isAssignableFrom(Byte.class) || clazz.isAssignableFrom(Short.class) ||
-            clazz.isAssignableFrom(Integer.class) || clazz.isAssignableFrom(Long.class) ||
-            clazz.isAssignableFrom(Double.class) || clazz.isAssignableFrom(Float.class) ||
-            clazz.isAssignableFrom(Character.class) || clazz.isAssignableFrom(Boolean.class);
+        return clazz.isPrimitive()
+            || clazz.isAssignableFrom(Byte.class) || clazz.isAssignableFrom(Short.class)
+            || clazz.isAssignableFrom(Integer.class) || clazz.isAssignableFrom(Long.class)
+            || clazz.isAssignableFrom(Double.class) || clazz.isAssignableFrom(Float.class)
+            || clazz.isAssignableFrom(Character.class) || clazz.isAssignableFrom(Boolean.class);
     }
 
 }

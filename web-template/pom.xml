@@ -184,27 +184,27 @@
                 <configuration>
                     <configLocation>checkstyle.xml</configLocation>
                 </configuration>
-<!--                <dependencies>-->
-<!--                    <dependency>-->
-<!--                        <groupId>com.puppycrawl.tools</groupId>-->
-<!--                        <artifactId>checkstyle</artifactId>-->
-<!--                        <version>8.0</version>-->
-<!--                    </dependency>-->
-<!--                </dependencies>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>validate</id>-->
-<!--                        <phase>validate</phase>-->
-<!--                        <configuration>-->
-<!--                            &lt;!&ndash; 暂不启用 &ndash;&gt;-->
-<!--                            <skip>false</skip>-->
-<!--                            <failsOnError>true</failsOnError>-->
-<!--                        </configuration>-->
-<!--                        <goals>-->
-<!--                            <goal>check</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
+                <!--                <dependencies>-->
+                <!--                    <dependency>-->
+                <!--                        <groupId>com.puppycrawl.tools</groupId>-->
+                <!--                        <artifactId>checkstyle</artifactId>-->
+                <!--                        <version>8.0</version>-->
+                <!--                    </dependency>-->
+                <!--                </dependencies>-->
+                <!--                <executions>-->
+                <!--                    <execution>-->
+                <!--                        <id>validate</id>-->
+                <!--                        <phase>validate</phase>-->
+                <!--                        <configuration>-->
+                <!--                            &lt;!&ndash; 暂不启用 &ndash;&gt;-->
+                <!--                            <skip>false</skip>-->
+                <!--                            <failsOnError>true</failsOnError>-->
+                <!--                        </configuration>-->
+                <!--                        <goals>-->
+                <!--                            <goal>check</goal>-->
+                <!--                        </goals>-->
+                <!--                    </execution>-->
+                <!--                </executions>-->
             </plugin>
         </plugins>
     </build>

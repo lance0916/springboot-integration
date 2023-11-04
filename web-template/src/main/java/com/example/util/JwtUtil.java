@@ -1,14 +1,14 @@
 package com.example.util;
 
+import java.util.Date;
+import java.util.UUID;
+
 import cn.hutool.core.lang.Assert;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.Date;
-import java.util.UUID;
 
 /**
  * @author WuQinglong
@@ -45,16 +45,16 @@ public class JwtUtil {
      */
     public static String createToken(String userId, String username) {
         JwtBuilder builder = Jwts.builder()
-                .setHeaderParam("alg", "HS256")
-                .setHeaderParam("typ", "JWT")
-                .setId(UUID.randomUUID().toString())
-                .setIssuer(ISSUER)
-                .setSubject(username)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRE_TIME))
-                .claim("userId", userId)
-                .claim("username", username)
-                .signWith(SignatureAlgorithm.HS256, SIGNING_KEY.getBytes());
+            .setHeaderParam("alg", "HS256")
+            .setHeaderParam("typ", "JWT")
+            .setId(UUID.randomUUID().toString())
+            .setIssuer(ISSUER)
+            .setSubject(username)
+            .setIssuedAt(new Date())
+            .setExpiration(new Date(System.currentTimeMillis() + EXPIRE_TIME))
+            .claim("userId", userId)
+            .claim("username", username)
+            .signWith(SignatureAlgorithm.HS256, SIGNING_KEY.getBytes());
         return builder.compact();
     }
 
@@ -83,9 +83,9 @@ public class JwtUtil {
      */
     public static Claims getClaims(String token) {
         return Jwts.parser()
-                .setSigningKey(SIGNING_KEY.getBytes())
-                .parseClaimsJws(token)
-                .getBody();
+            .setSigningKey(SIGNING_KEY.getBytes())
+            .parseClaimsJws(token)
+            .getBody();
     }
 
     public static String getUserId() {

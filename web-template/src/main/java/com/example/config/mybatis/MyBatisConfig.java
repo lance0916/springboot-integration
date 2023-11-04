@@ -1,6 +1,7 @@
 package com.example.config.mybatis;
 
 import javax.sql.DataSource;
+
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.context.annotation.Bean;

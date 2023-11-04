@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration
-    PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
-    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
     <context id="default" targetRuntime="MyBatis3">
@@ -35,10 +35,10 @@
         </commentGenerator>
 
         <jdbcConnection
-            connectionURL="${mybatis.generator.jdbcUrl}"
-            userId="${mybatis.generator.username}"
-            password="${mybatis.generator.password}"
-            driverClass="com.mysql.cj.jdbc.Driver"
+                connectionURL="${mybatis.generator.jdbcUrl}"
+                userId="${mybatis.generator.username}"
+                password="${mybatis.generator.password}"
+                driverClass="com.mysql.cj.jdbc.Driver"
         />
 
         <javaTypeResolver>
@@ -48,13 +48,13 @@
 
         <!-- Model 文件 -->
         <javaModelGenerator targetPackage="${mybatis.generator.modelPackageName}"
-            targetProject="src/main/java"/>
+                            targetProject="src/main/java"/>
         <!-- xml 文件 -->
         <sqlMapGenerator targetPackage="${mybatis.generator.xmlPackageName}"
-            targetProject="src/main/resources"/>
+                         targetProject="src/main/resources"/>
         <!-- Mapper 文件 -->
         <javaClientGenerator targetPackage="${mybatis.generator.mapperPackageName}"
-            targetProject="src/main/java" type="XMLMAPPER"/>
+                             targetProject="src/main/java" type="XMLMAPPER"/>
 
         <table tableName="user_info">
             <property name="useActualColumnNames" value="false"/>

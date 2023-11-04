@@ -1,15 +1,16 @@
 package com.example.config;
 
-import cn.hutool.core.date.DatePattern;
-import com.example.bean.constants.TraceConstant;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
+
+import cn.hutool.core.date.DatePattern;
+import com.example.bean.constants.TraceConstant;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.config.ConnectionConfig;

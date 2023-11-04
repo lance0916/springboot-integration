@@ -5,7 +5,7 @@
 
     <!-- 格式文档：https://logback.qos.ch/manual/layouts.html#conversionWord -->
     <variable name="LOG_PATTERN"
-        value="%d %level [%thread] traceid:%X{traceid} pspanid:%X{pspanid} spanid:%X{spanid} [%C#%M:%L] %m%n"/>
+              value="%d %level [%thread] traceid:%X{traceid} pspanid:%X{pspanid} spanid:%X{spanid} [%C#%M:%L] %m%n"/>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>

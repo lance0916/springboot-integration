@@ -1,7 +1,9 @@
 package com.example.config.filter;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.Arrays;
@@ -9,18 +11,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.lang.NonNull;
+import org.springframework.util.StopWatch;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.ContentCachingResponseWrapper;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * @author 吴庆龙
@@ -41,29 +43,28 @@ public class RequestLogFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
         @NonNull FilterChain filterChain) throws IOException, ServletException {
-        // 开始计时
-        long startTs = System.currentTimeMillis();
-
         // 封装
         ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(request);
         ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(response);
+
+        // 开始计时
+        StopWatch stopWatch = new StopWatch();
         try {
+            stopWatch.start("request");
             filterChain.doFilter(requestWrapper, responseWrapper);
         } finally {
+            stopWatch.stop();
             try {
-                logReqResp(startTs, requestWrapper, responseWrapper);
+                logReqResp(stopWatch, requestWrapper, responseWrapper);
             } catch (Exception e) {
                 // ignore
             }
         }
     }
 
-    private void logReqResp(long startTs, ContentCachingRequestWrapper requestWrapper,
+    private void logReqResp(StopWatch stopWatch, ContentCachingRequestWrapper requestWrapper,
         ContentCachingResponseWrapper responseWrapper) throws IOException {
-        // 结束计时，计算耗时
-        long costTs = System.currentTimeMillis() - startTs;
-
-        long logStartTs = System.currentTimeMillis();
+        stopWatch.start("log");
         // uri参数
         String queryString = Optional.ofNullable(requestWrapper.getQueryString()).orElse("");
         // form参数
@@ -135,32 +136,32 @@ public class RequestLogFilter extends OncePerRequestFilter {
             }
         }
 
-        long logStopTs = System.currentTimeMillis();
-
         StringBuilder sb = new StringBuilder();
         sb.append("Method:").append(requestWrapper.getMethod()).append(" ");
         sb.append("Uri:").append(requestWrapper.getRequestURI()).append(" ");
         sb.append("ContentType:").append(requestContentType).append(" ");
-        if (queryString.length() > 0) {
+        if (!queryString.isEmpty()) {
             sb.append("UriParam:").append(queryString).append(" ");
         }
         if (formParam.length() > 0) {
             sb.append("Form:").append(formParam).append(" ");
         }
-        if (requestBody.length() > 0) {
+        if (!requestBody.isEmpty()) {
             sb.append("Body:").append(requestBody).append(" ");
         }
-        if (requestBody.length() > 0) {
+        if (!requestBody.isEmpty()) {
             sb.append("Body:").append(requestBody).append(" ");
         }
-        if (responseContentType.length() > 0) {
+        if (!responseContentType.isEmpty()) {
             sb.append("RespContentType:").append(responseContentType).append(" ");
         }
-        if (responseBody.length() > 0) {
+        if (!responseBody.isEmpty()) {
             sb.append("RespBody:").append(responseBody).append(" ");
         }
-        sb.append("CostTime:").append(costTs).append("(").append(logStopTs - logStartTs).append(")ms");
-        log.info(sb.toString());
+        stopWatch.stop();
+
+//        sb.append("CostTime:").append(costTs).append("(").append(logCostTs).append(")ms");
+//        log.info(sb.toString());
 
         // 写入响应消息到客户端
         responseWrapper.copyBodyToResponse();
