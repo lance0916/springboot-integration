@@ -6,45 +6,53 @@
 <!-- document https://checkstyle.sourceforge.io/checks.html -->
 
 <module name="Checker">
-<!--    <property name="basedir" value="src"/>-->
+    <!--    <property name="basedir" value="src"/>-->
     <property name="fileExtensions" value="java,properties"/>
-    <property name="tabWidth" value="4"/>
 
     <module name="LineLength">
         <property name="max" value="120"/>
         <property name="fileExtensions" value="java"/>
+        <property name="ignorePattern"
+                  value="^( *\* *([^ ]+|\{@code .*|&lt;a href=&quot;[^&quot;]+&quot;&gt;)|(package|import) .*)$"/>
     </module>
     <module name="FileLength">
         <property name="max" value="2000"/>
+        <property name="fileExtensions" value="java"/>
     </module>
-    <module name="FileTabCharacter"/>
     <module name="Translation">
         <property name="baseName" value="^messages.*$"/>
         <property name="fileExtensions" value="properties, translations"/>
     </module>
+    <module name="FileTabCharacter"/>
     <module name="UniqueProperties"/>
 
     <module name="TreeWalker">
+        <property name="tabWidth" value="4"/>
+
         <!-- Annotations -->
+        <!-- 注释应该单独一行 -->
         <module name="AnnotationLocation">
-            <property name="tokens" value="METHOD_DEF"/>
-            <property name="allowSamelineMultipleAnnotations" value="false"/>
             <property name="allowSamelineSingleParameterlessAnnotation" value="false"/>
-            <property name="allowSamelineParameterizedAnnotation" value="false"/>
         </module>
+        <!-- 标有 @Deprecated 的，必须在 javadoc 中使用 @deprecated 进行注释 -->
         <module name="MissingDeprecated"/>
+        <!-- 重写的方法必须标有 @Override 注解 -->
         <module name="MissingOverride"/>
+        <!-- 禁止空的 @SuppressWarnings("") 注解 -->
         <module name="SuppressWarnings"/>
 
         <!-- Block Checks -->
-        <module name="AvoidNestedBlocks">
-            <property name="allowInSwitchCase" value="true"/>
-        </module>
+        <!-- 避免内嵌块 {} -->
+        <module name="AvoidNestedBlocks"/>
+        <!-- 禁止使用空的块，比如空的for，空的try -->
         <module name="EmptyBlock"/>
+        <!-- 禁止使用空的catch块 -->
         <module name="EmptyCatchBlock">
             <property name="exceptionVariableName" value="expected|ignore"/>
         </module>
+        <!-- 左 { 不需要换行 -->
         <module name="LeftCurly"/>
+        <!-- 右 { 需要换行 -->
         <module name="RightCurly"/>
 
         <!-- Class Design -->
@@ -92,7 +100,8 @@
                       value="STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###STATIC"/>
         </module>
         <module name="RedundantImport"/>
-        <module name="UnusedImports"/>
+        <!-- 不应该有无用的导入 -->
+<!--        <module name="UnusedImports"/>-->
 
         <!-- Javadoc Comments -->
         <module name="InvalidJavadocPosition"/>
@@ -102,7 +111,7 @@
         <module name="SingleLineJavadoc"/>
 
         <!-- Metrics -->
-<!--        <module name="BooleanExpressionComplexity"/>-->
+        <!--        <module name="BooleanExpressionComplexity"/>-->
 
         <!-- Miscellaneous -->
         <module name="ArrayTypeStyle"/>
@@ -127,17 +136,17 @@
             <property name="sumTokenCounts" value="true"/>
         </module>
         <module name="Indentation"/>
-<!--        <module name="NoCodeInFile"/>-->
+        <!--        <module name="NoCodeInFile"/>-->
         <module name="OuterTypeFilename"/>
         <module name="TodoComment"/>
         <module name="UpperEll"/>
 
         <!-- Naming Conventions -->
         <module name="AbbreviationAsWordInName"/>
-<!--        <module name="AbstractClassName"/>-->
+        <!--        <module name="AbstractClassName"/>-->
         <module name="CatchParameterName"/>
         <module name="ClassTypeParameterName"/>
-<!--        <module name="ConstantName"/>-->
+        <!--        <module name="ConstantName"/>-->
         <module name="InterfaceTypeParameterName"/>
         <module name="LambdaParameterName"/>
         <module name="LocalFinalVariableName"/>
@@ -153,11 +162,6 @@
         <module name="TypeName"/>
 
         <!-- Regexp -->
-<!--        <module name="Regexp">-->
-<!--            <property name="format" value="System\.out\.println"/>-->
-<!--            <property name="illegalPattern" value="true"/>-->
-<!--            <property name="ignoreComments" value="true"/>-->
-<!--        </module>-->
 
         <!-- Size Violations -->
         <module name="AnonInnerLength">
