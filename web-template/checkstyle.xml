@@ -2,32 +2,46 @@
 <!DOCTYPE module PUBLIC
         "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
         "http://checkstyle.sourceforge.net/dtds/configuration_1_3.dtd">
-
 <!-- document https://checkstyle.sourceforge.io/checks.html -->
 
 <module name="Checker">
-    <!--    <property name="basedir" value="src"/>-->
+    <!--<property name="basedir" value="src"/>-->
     <property name="fileExtensions" value="java,properties"/>
 
+    <module name="SuppressWarningsFilter"/>
+    <!-- 使用 '// CHECKSTYLE:OFF' 和 '// CHECKSTYLE:ON' 忽略范围内的检查 -->
+    <module name="SuppressWithPlainTextCommentFilter"/>
+
+    <!-- 限制每行的字符数 -->
     <module name="LineLength">
         <property name="max" value="120"/>
         <property name="fileExtensions" value="java"/>
         <property name="ignorePattern"
                   value="^( *\* *([^ ]+|\{@code .*|&lt;a href=&quot;[^&quot;]+&quot;&gt;)|(package|import) .*)$"/>
     </module>
+    <!-- 限制文件行数 -->
     <module name="FileLength">
         <property name="max" value="2000"/>
         <property name="fileExtensions" value="java"/>
     </module>
+    <!-- 翻译文件的检查 -->
     <module name="Translation">
         <property name="baseName" value="^messages.*$"/>
-        <property name="fileExtensions" value="properties, translations"/>
+        <property name="fileExtensions" value="properties"/>
     </module>
-    <module name="FileTabCharacter"/>
+    <!-- Checks that there are no tab characters ('\t') in the source code. -->
+    <module name="FileTabCharacter">
+        <property name="eachLine" value="true"/>
+        <property name="fileExtensions" value="java, xml, properties"/>
+    </module>
+    <!-- Detects duplicated keys in properties files. -->
     <module name="UniqueProperties"/>
 
     <module name="TreeWalker">
-        <property name="tabWidth" value="4"/>
+        <!-- 使用 '// SUPPRESS CHECKSTYLE' 为前缀的注释标记为忽略 -->
+        <module name="SuppressWithNearbyCommentFilter">
+            <property name="commentFormat" value="SUPPRESS CHECKSTYLE(\.*)"/>
+        </module>
 
         <!-- Annotations -->
         <!-- 注释应该单独一行 -->
@@ -58,35 +72,63 @@
         <!-- Class Design -->
 
         <!-- Coding -->
+        <!-- Detects double brace initialization. -->
         <module name="AvoidDoubleBraceInitialization"/>
+        <!-- Checks that classes and records which define a covariant equals() method also override method equals(Object). -->
+        <module name="CovariantEquals"/>
+        <!-- Check that the default is after all the cases in a switch statement. -->
         <module name="DefaultComesLast"/>
+        <!-- Detects empty statements (standalone ";" semicolon). Empty statements often introduce bugs that are hard to spot -->
         <module name="EmptyStatement"/>
+        <!-- 避免调用 equals 方法时发生 NPE 异常 -->
         <module name="EqualsAvoidNull"/>
+        <!-- checks for assignments in subexpressions, such as in String s = Integer.toString(i = 2);. -->
         <module name="InnerAssignment"/>
+        <!-- Checks that switch statement has a default clause. -->
         <module name="MissingSwitchDefault"/>
+        <!-- Checks that for loop control variables are not modified inside the for block. -->
+        <module name="ModifiedControlVariable"/>
+        <!-- Checks that each variable declaration is in its own statement and on its own line. -->
         <module name="MultipleVariableDeclarations"/>
+        <!-- 限制 for 嵌套的深度 -->
         <module name="NestedForDepth">
             <property name="max" value="3"/>
         </module>
+        <!-- 限制 if 嵌套的深度 -->
         <module name="NestedIfDepth">
             <property name="max" value="3"/>
         </module>
+        <!-- 限制 try 嵌套的深度 -->
         <module name="NestedTryDepth">
             <property name="max" value="3"/>
         </module>
+        <!-- 数组中定义中结尾的元素不允许跟着逗号 -->
         <module name="NoArrayTrailingComma"/>
+        <!-- Checks that there is no method finalize with zero parameters. -->
         <module name="NoFinalizer"/>
+        <!-- Checks that there is only one statement per line. -->
         <module name="OneStatementPerLine"/>
+        <!-- class 文件必须定义在 package 中，并且 package 的名字和目录名要匹配 -->
         <module name="PackageDeclaration"/>
+        <!-- 检测是否有必要加 this，减少代码冲突 -->
         <module name="RequireThis"/>
+        <!-- Checks for over-complicated boolean expressions. -->
         <module name="SimplifyBooleanExpression"/>
+        <!-- Checks for over-complicated boolean return statements. -->
         <module name="SimplifyBooleanReturn"/>
+        <!-- Checks that string literals are not used with == or !=. -->
         <module name="StringLiteralEquality"/>
+        <!-- Checks if unnecessary semicolon is used after type declaration. -->
         <module name="UnnecessarySemicolonAfterOuterTypeDeclaration"/>
+        <!-- Checks if unnecessary semicolon is used after type member declaration. -->
         <module name="UnnecessarySemicolonAfterTypeMemberDeclaration"/>
-        <module name="UnnecessarySemicolonInTryWithResources"/>
+        <!-- Checks if unnecessary semicolon is in enum definitions. -->
         <module name="UnnecessarySemicolonInEnumeration"/>
+        <!-- Checks if unnecessary semicolon is used in last resource declaration. -->
+        <module name="UnnecessarySemicolonInTryWithResources"/>
+        <!-- Checks that a local variable is declared and/or assigned, but not used. -->
         <module name="UnusedLocalVariable"/>
+        <!-- Checks the distance between declaration of variable and its first usage. -->
         <module name="VariableDeclarationUsageDistance">
             <property name="allowedDistance" value="5"/>
         </module>
@@ -94,28 +136,42 @@
         <!-- Headers -->
 
         <!-- Imports -->
+        <!-- Checks that there are no import statements that use the * notation. -->
         <module name="AvoidStarImport"/>
+        <!-- Checks that the groups of import declarations appear in the order specified by the user. -->
         <module name="CustomImportOrder">
             <property name="customImportOrderRules"
                       value="STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###STATIC"/>
         </module>
+        <!-- Checks for redundant import statements. -->
         <module name="RedundantImport"/>
         <!-- 不应该有无用的导入 -->
-<!--        <module name="UnusedImports"/>-->
+        <!--<module name="UnusedImports"/>-->
 
         <!-- Javadoc Comments -->
+        <!-- Checks that Javadocs are located at the correct position. -->
         <module name="InvalidJavadocPosition"/>
+        <!-- Checks that the Javadoc content begins from the same position for all Javadoc comments in the project. -->
         <module name="JavadocContentLocationCheck"/>
+        <!-- Checks if the javadoc has leading asterisks on each line. -->
         <module name="JavadocMissingLeadingAsterisk"/>
+        <!-- Checks that there is at least one whitespace after the leading asterisk. -->
         <module name="JavadocMissingWhitespaceAfterAsterisk"/>
-        <module name="SingleLineJavadoc"/>
+        <!-- Checks that a Javadoc block can fit in a single-line and doesn't contain block tags. -->
+        <module name="SingleLineJavadoc">
+            <property name="ignoredTags" value="@inheritDoc, @see"/>
+        </module>
 
         <!-- Metrics -->
-        <!--        <module name="BooleanExpressionComplexity"/>-->
+        <!-- Restricts the number of boolean operators (&&, ||, &, | and ^) in an expression. -->
+        <!--<module name="BooleanExpressionComplexity"/>-->
 
         <!-- Miscellaneous -->
+        <!-- Checks the style of array type definitions. -->
         <module name="ArrayTypeStyle"/>
+        <!-- Restricts using Unicode escapes (such as \u221e). -->
         <module name="AvoidEscapedUnicodeCharacters"/>
+        <!-- Controls the indentation between comments and surrounding code. -->
         <module name="CommentsIndentation">
             <property name="tokens" value="BLOCK_COMMENT_BEGIN"/>
         </module>
@@ -127,26 +183,21 @@
             <property name="maximumDepth" value="0"/>
             <property name="maximumMessage" value="Empty statement is not allowed."/>
         </module>
-        <!-- To configure the check to produce a violation on comparing this with null -->
-        <module name="DescendantToken">
-            <property name="tokens" value="EQUAL,NOT_EQUAL"/>
-            <property name="limitedTokens" value="LITERAL_THIS,LITERAL_NULL"/>
-            <property name="maximumNumber" value="1"/>
-            <property name="maximumDepth" value="1"/>
-            <property name="sumTokenCounts" value="true"/>
-        </module>
+        <!-- Checks correct indentation of Java code. -->
         <module name="Indentation"/>
-        <!--        <module name="NoCodeInFile"/>-->
+        <!--<module name="NoCodeInFile"/>-->
+        <!-- Checks that the outer type name and the file name match. -->
         <module name="OuterTypeFilename"/>
         <module name="TodoComment"/>
+        <!-- Checks that long constants are defined with an upper ell. That is 'L' and not 'l'. -->
         <module name="UpperEll"/>
 
         <!-- Naming Conventions -->
         <module name="AbbreviationAsWordInName"/>
-        <!--        <module name="AbstractClassName"/>-->
+        <!--<module name="AbstractClassName"/>-->
         <module name="CatchParameterName"/>
         <module name="ClassTypeParameterName"/>
-        <!--        <module name="ConstantName"/>-->
+        <!--<module name="ConstantName"/>-->
         <module name="InterfaceTypeParameterName"/>
         <module name="LambdaParameterName"/>
         <module name="LocalFinalVariableName"/>
@@ -164,6 +215,7 @@
         <!-- Regexp -->
 
         <!-- Size Violations -->
+        <!-- 限制匿名内部类的行数 -->
         <module name="AnonInnerLength">
             <property name="max" value="60"/>
         </module>
@@ -175,12 +227,15 @@
             <property name="max" value="300"/>
             <property name="countEmpty" value="false"/>
         </module>
-        <module name="OuterTypeNumber">
-            <property name="max" value="2"/>
+        <module name="MethodLength">
+            <property name="tokens" value="CTOR_DEF, COMPACT_CTOR_DEF"/>
+            <property name="max" value="80"/>
+            <property name="countEmpty" value="false"/>
         </module>
+        <!-- 限制一个类文件内里定义多个类 -->
+        <!--<module name="OuterTypeNumber"/>-->
         <module name="ParameterNumber">
             <property name="max" value="10"/>
-            <property name="tokens" value="METHOD_DEF"/>
         </module>
         <module name="RecordComponentNumber">
             <property name="max" value="10"/>
@@ -196,6 +251,7 @@
         <module name="MethodParamPad">
             <property name="allowLineBreaks" value="true"/>
         </module>
+        <!-- 检查 PACKAGE_DEF, IMPORT, STATIC_IMPORT 是否换行了，不允许换行 -->
         <module name="NoLineWrap"/>
         <module name="NoWhitespaceAfter"/>
         <module name="NoWhitespaceBefore"/>
