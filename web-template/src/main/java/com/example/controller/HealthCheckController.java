@@ -37,6 +37,7 @@ public class HealthCheckController {
      */
     @GetMapping("/status")
     public ResponseEntity<Void> getStatus() {
+        // TODO: asda
         logger.info("心跳检测状态码:{}", currentSystemStatus);
         return ResponseEntity.status(currentSystemStatus).build();
     }
