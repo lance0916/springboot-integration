@@ -5,7 +5,6 @@
 <!-- document https://checkstyle.sourceforge.io/checks.html -->
 
 <module name="Checker">
-    <property name="basedir" value="src/main"/>
     <property name="fileExtensions" value="java, properties"/>
 
     <!-- 使用 @SuppressWarnings 注解抑制检查项 -->
