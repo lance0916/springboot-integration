@@ -21,17 +21,17 @@ public class ExampleApplication implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        String hostName = InetAddress.getLocalHost().getHostName();
-
-        for (MemoryPoolMXBean mxBean : memoryPoolMXBeans) {
-//            String[] memoryManagerNames = mxBean.getMemoryManagerNames();
-//            for (String memoryManagerName : memoryManagerNames) {
-//                System.out.println(memoryManagerName);
-//            }
-
-            System.out.println(mxBean.getName());
-
-        }
+//        String hostName = InetAddress.getLocalHost().getHostName();
+//
+//        for (MemoryPoolMXBean mxBean : memoryPoolMXBeans) {
+////            String[] memoryManagerNames = mxBean.getMemoryManagerNames();
+////            for (String memoryManagerName : memoryManagerNames) {
+////                System.out.println(memoryManagerName);
+////            }
+//
+//            System.out.println(mxBean.getName());
+//
+//        }
 
     }
 
