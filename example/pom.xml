@@ -39,6 +39,22 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
 
+        <!-- add tree sitter -->
+        <dependency>
+            <groupId>io.github.bonede</groupId>
+            <artifactId>tree-sitter</artifactId>
+            <version>0.22.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonede</groupId>
+            <artifactId>tree-sitter-json</artifactId>
+            <version>0.20.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonede</groupId>
+            <artifactId>tree-sitter-java</artifactId>
+            <version>0.20.2</version>
+        </dependency>
     </dependencies>
 
     <build>

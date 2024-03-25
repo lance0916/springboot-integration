@@ -1,8 +1,6 @@
 package com.snailwu.example;
 
-import cn.hutool.core.date.DateUtil;
-
-import java.util.Date;
+import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  * @author WuQinglong
@@ -11,10 +9,11 @@ import java.util.Date;
 public class ExampleMain {
 
     public static void main(String[] args) {
+        String s = System.currentTimeMillis() + RandomStringUtils.random(10);
+        System.out.println(s.length());
 
-        Date referenceDate = new Date(1600617600000L);
-        System.out.println(DateUtil.formatDateTime(referenceDate));
+        System.out.println(RandomStringUtils.randomAlphabetic(32));
+        System.out.println(RandomStringUtils.random(32, true, true));
 
     }
-
 }

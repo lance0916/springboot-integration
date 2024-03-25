@@ -1,0 +1,3 @@
+int i = 10;
+Arrays.asList("1", "2")
+    .stream()

@@ -1,5 +1,6 @@
 package com.snailwu.example;
 
+import com.snailwu.example.bean.UserInfo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,12 @@ public class ExampleController {
     public String bodyTest(@RequestBody Map<String, Object> aMap, @RequestBody Map<String, Object> bMap) {
         System.out.println(aMap);
         System.out.println(bMap);
+        return "success";
+    }
+
+    @PostMapping("/userInfo")
+    public String form(UserInfo userInfo) {
+        System.out.println(userInfo.getName());
         return "success";
     }
 

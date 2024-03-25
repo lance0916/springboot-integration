@@ -19,7 +19,7 @@ import static com.alibaba.csp.sentinel.adapter.servlet.CommonFilter.HTTP_METHOD_
 /**
  * @author WuQinglong
  */
-@Configuration
+//@Configuration
 public class FilterConfig implements InitializingBean {
 
     @Bean
